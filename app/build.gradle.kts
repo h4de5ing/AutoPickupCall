@@ -15,9 +15,24 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "android"
+            keyPassword = "android"
+            //NewPublic Q86
+            storeFile =
+                file("D:\\Android12SignerGUI\\SignFiles\\NewPublic\\platform.jks")
+            storePassword = "android"
+        }
+    }
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+        }
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -35,4 +50,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("androidx.lifecycle:lifecycle-service:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.0")
 }
